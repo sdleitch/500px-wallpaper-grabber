@@ -15,7 +15,7 @@ def get_new_wallpapers(pic_array, min_width)
     to_write << pic if (pic['width'] >= min_width) && (pic['width'] > pic['height']) && (pic['height'] > min_width * 1.6)
   end
   # Delete current photos
-  Dir.foreach('wallpapers/') { |f| File.delete(f) if f != '.' && f != '..' }
+  Dir.foreach('wallpapers/') {|f| fn = File.join('wallpapers/', f); File.delete(fn) if f != '.' && f != '..'}
   # Save the new photos
   to_write.each { |pic| File.write("wallpapers/#{pic['id']}.jpg", open(pic['image_url']).read) }
 end
